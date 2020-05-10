@@ -31,12 +31,16 @@
 // Ignore temp readings during development.
 //#define BOGUS_TEMPERATURE_GRACE_PERIOD    2000
 
-#if EITHER(NO_EEPROM_SELECTED, FLASH_EEPROM_EMULATION)
-  #define FLASH_EEPROM_EMULATION
-  #define EEPROM_PAGE_SIZE     (0x800U)           // 2KB
-  #define EEPROM_START_ADDRESS (0x8000000UL + (STM32_FLASH_SIZE) * 1024UL - (EEPROM_PAGE_SIZE) * 2UL)
-  #define MARLIN_EEPROM_SIZE    EEPROM_PAGE_SIZE  // 2KB
-#endif
+//#if EITHER(NO_EEPROM_SELECTED, FLASH_EEPROM_EMULATION)
+//  #define FLASH_EEPROM_EMULATION
+//  #define EEPROM_PAGE_SIZE     (0x800U)           // 2KB
+//  #define EEPROM_START_ADDRESS (0x8000000UL + (STM32_FLASH_SIZE) * 1024UL - (EEPROM_PAGE_SIZE) * 2UL)
+//  #define MARLIN_EEPROM_SIZE    EEPROM_PAGE_SIZE  // 2KB
+//#endif
+#define I2C_EEPROM
+#define E2END 0xFFF // EEPROM end address (4kB)
+
+#define CASE_LIGHT_PIN                      PC14
 
 //
 // Servos
@@ -59,7 +63,7 @@
 // Filament Runout Sensor
 //
 #ifndef FIL_RUNOUT_PIN
-  #define FIL_RUNOUT_PIN                    PC15  // "E0-STOP"
+  #define FIL_RUNOUT_PIN                    PC12  // "E0-STOP"
 #endif
 
 //
@@ -125,15 +129,15 @@
   #define EXP1_9                            PA15
   #define EXP1_3                            PB15
 #else
-  #define EXP1_9                            PB6
-  #define EXP1_3                            PB7
+  #define EXP1_9                            PC15//PB6
+  #define EXP1_3                            PB5//PB7
 #endif
 
 #if HAS_WIRED_LCD
 
   #if ENABLED(CR10_STOCKDISPLAY)
 
-    #define BEEPER_PIN                      PB5
+    //#define BEEPER_PIN                      PB5
     #define BTN_ENC                       EXP1_9
 
     #define BTN_EN1                         PA9
