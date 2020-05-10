@@ -938,6 +938,10 @@ inline void tmc_standby_setup() {
  *    • Max7219
  */
 void setup() {
+  
+  #if ENABLED(CASE_LIGHT_ENABLE)
+    OUT_WRITE(CASE_LIGHT_PIN, CASE_LIGHT_DEFAULT_ON ? !INVERT_CASE_LIGHT : INVERT_CASE_LIGHT);
+  #endif
 
   tmc_standby_setup();  // TMC Low Power Standby pins must be set early or they're not usable
 
