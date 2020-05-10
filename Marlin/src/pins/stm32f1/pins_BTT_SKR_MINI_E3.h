@@ -31,11 +31,17 @@
 // Ignore temp readings during development.
 //#define BOGUS_TEMPERATURE_GRACE_PERIOD 2000
 
-#define FLASH_EEPROM_EMULATION
-#define EEPROM_PAGE_SIZE     uint16(0x800) // 2KB
-#define EEPROM_START_ADDRESS uint32(0x8000000 + (STM32_FLASH_SIZE) * 1024 - 2 * EEPROM_PAGE_SIZE)
-#undef E2END
-#define E2END                (EEPROM_PAGE_SIZE - 1) // 2KB
+//#define FLASH_EEPROM_EMULATION
+//#define EEPROM_PAGE_SIZE     uint16(0x800) // 2KB
+//#define EEPROM_START_ADDRESS uint32(0x8000000 + (STM32_FLASH_SIZE) * 1024 - 2 * EEPROM_PAGE_SIZE)
+//#undef E2END
+//#define E2END                (EEPROM_PAGE_SIZE - 1) // 2KB
+#define I2C_EEPROM
+//#define I2C_EEPROM_SDA PC7
+//#define I2C_EEPROM_SCL PC15
+#define E2END 0xFFF // EEPROM end address (4kB)
+
+#define CASE_LIGHT_PIN                      PC14
 
 //
 // Servos
@@ -58,7 +64,7 @@
 // Filament Runout Sensor
 //
 #ifndef FIL_RUNOUT_PIN
-  #define FIL_RUNOUT_PIN                    PC15  // "E0-STOP"
+  #define FIL_RUNOUT_PIN                    PC12  // "E0-STOP"
 #endif
 
 //
@@ -112,20 +118,20 @@
  *                 EXP1
  */
 
-#define EXPA1_03_PIN                        PB7
+#define EXPA1_03_PIN                        PB5//PB7
 #define EXPA1_04_PIN                        PB8
 #define EXPA1_05_PIN                        PB9
 #define EXPA1_06_PIN                        PA10
 #define EXPA1_07_PIN                        -1
 #define EXPA1_08_PIN                        PA9
-#define EXPA1_09_PIN                        PB6
+#define EXPA1_09_PIN                        PC15//PB6
 #define EXPA1_10_PIN                        PB5
 
 #if HAS_SPI_LCD
 
   #if ENABLED(CR10_STOCKDISPLAY)
 
-    #define BEEPER_PIN              EXPA1_10_PIN
+   // #define BEEPER_PIN              EXPA1_10_PIN
 
     #define BTN_EN1                 EXPA1_08_PIN
     #define BTN_EN2                 EXPA1_06_PIN
