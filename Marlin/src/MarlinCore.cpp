@@ -837,6 +837,10 @@ void stop() {
  *    • Max7219
  */
 void setup() {
+  
+  #if ENABLED(CASE_LIGHT_ENABLE)
+    OUT_WRITE(CASE_LIGHT_PIN, CASE_LIGHT_DEFAULT_ON ? !INVERT_CASE_LIGHT : INVERT_CASE_LIGHT);
+  #endif
 
   HAL_init();
 
