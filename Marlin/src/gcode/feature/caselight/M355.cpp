@@ -50,6 +50,10 @@ void GcodeSuite::M355() {
     didset = true;
     caselight.on = parser.value_bool();
   }
+  if (parser.seen('T')) {
+    didset = true;
+    caselight.on = !caselight.on;
+  }
   if (didset) caselight.update(sflag);
 
   // Always report case light status
